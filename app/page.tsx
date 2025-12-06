@@ -382,10 +382,9 @@ if (response.ok) {
           }}
         ></motion.div>
       </div>
-      {/* Matrix Rain Effect - Hidden on mobile to stop lag */}
-<div className="hidden md:block">
-  <MatrixRain />
-</div>
+      {/* Matrix Rain Effect */}
+      <MatrixRain />
+
 
       {/* Removed the CustomCursor component */}
 
