@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Loader2, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -16,6 +16,7 @@ export function ContactSection() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -25,6 +26,7 @@ export function ContactSection() {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setIsSuccess(false); // Reset success state on new try
 
     try {
       const response = await fetch("/api/contact", {
@@ -36,12 +38,14 @@ export function ContactSection() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Message sent successfully!");
+        setIsSuccess(true);
         setFormData({ name: "", email: "", subject: "", message: "" });
+        toast.success("Message sent successfully!");
+        
+        // Optional: Hide the success message after 5 seconds
+        setTimeout(() => setIsSuccess(false), 5000);
       } else {
-        // If the main email fails, we just show the error now (since fallback is gone)
-        toast.error(data.message || "Failed to send email. Please check your connection.");
-        console.error("Email Error:", data.message);
+        toast.error(data.message || "Failed to send email.");
       }
     } catch (error) {
       console.error("Network Error:", error);
@@ -61,7 +65,7 @@ export function ContactSection() {
           {/* --- LEFT PANEL: VISUALS --- */}
           <div className="relative w-full md:w-5/12 bg-black-950 p-10 flex flex-col justify-between overflow-hidden group">
             
-            {/* 1. BACKGROUND STARS */}
+            {/* BACKGROUND STARS */}
             <div className="absolute inset-0 z-0">
                <div className="absolute top-10 left-10 w-1 h-1 bg-white rounded-full animate-pulse"></div>
                <div className="absolute top-1/3 left-1/2 w-0.5 h-0.5 bg-white rounded-full animate-pulse delay-75"></div>
@@ -70,7 +74,7 @@ export function ContactSection() {
                <div className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-tr from-red-900/10 via-transparent to-blue-900/10"></div>
             </div>
 
-            {/* 2. TEXTURE LINES */}
+            {/* TEXTURE LINES */}
             <div className="absolute inset-0 z-10 opacity-50 pointer-events-none mix-blend-screen">
               <Image 
                 src="/images/space/lines-min.avif" 
@@ -80,7 +84,7 @@ export function ContactSection() {
               />
             </div>
 
-            {/* 3. CONTENT */}
+            {/* CONTENT */}
             <div className="relative z-30">
               <h3 className="text-3xl font-bold text-white mb-4">Get in Touch</h3>
               <p className="text-gray-300 mb-8 leading-relaxed">
@@ -125,7 +129,7 @@ export function ContactSection() {
               </div>
             </div>
 
-            {/* 4. PLANET IMAGE */}
+            {/* PLANET IMAGE */}
             <motion.div 
               className="absolute -bottom-24 -right-24 w-96 h-96 z-20 pointer-events-none"
               animate={{ 
@@ -149,6 +153,7 @@ export function ContactSection() {
           {/* --- RIGHT PANEL: FORM --- */}
           <div className="w-full md:w-7/12 p-8 md:p-12 bg-background dark:bg-card flex flex-col justify-center relative z-10">
             <h3 className="text-2xl font-bold mb-6 text-foreground">Send me a Message</h3>
+            
             <form onSubmit={handleFormSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="space-y-2">
@@ -216,6 +221,27 @@ export function ContactSection() {
                         <>Send Message <Send className="ml-2 h-5 w-5" /></>
                     )}
                 </Button>
+
+                {/* --- SUCCESS MESSAGE (BELOW BUTTON) --- */}
+                <AnimatePresence>
+                    {isSuccess && (
+                        <motion.div 
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -10 }}
+                            className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/20 rounded-xl mt-4"
+                        >
+                            <div className="bg-green-500 rounded-full p-1">
+                                <CheckCircle2 className="w-5 h-5 text-white" />
+                            </div>
+                            <div>
+                                <h4 className="font-bold text-green-600 dark:text-green-400">Message Sent Successfully!</h4>
+                                <p className="text-sm text-green-600/80 dark:text-green-400/80">I will connect with you as soon as possible.</p>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
             </form>
           </div>
 
