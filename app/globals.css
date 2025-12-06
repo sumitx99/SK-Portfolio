@@ -1,0 +1,414 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 84% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 84% 60%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 84% 60%;
+
+    --radius: 0.5rem;
+  }
+
+  .light {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 84% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 84% 60%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 84% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ef4444;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b91c1c;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-red-600 to-red-700;
+}
+
+/* Gradient backgrounds */
+.gradient-bg {
+  @apply bg-gradient-to-r from-red-600 via-red-700 to-red-800;
+}
+
+.gradient-bg-hover {
+  @apply hover:bg-gradient-to-r hover:from-red-700 hover:via-red-800 hover:to-red-900;
+}
+
+/* Glitch effect */
+.glitch-text {
+  position: relative;
+  animation: glitch 2s infinite;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -1px 0 red;
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: 1px 0 red;
+  animation: glitch-anim2 3s infinite linear alternate-reverse;
+}
+.red-glitch-text {
+  position: relative;
+  color: #fff;
+  animation: red-glitch 3s infinite;
+}
+
+.red-glitch-text::before,
+.red-glitch-text::after {
+  content: "SUMIT KUMAR RANJAN";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.red-glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff0000;
+  animation: red-glitch-1 0.4s infinite linear alternate-reverse;
+}
+
+.red-glitch-text::after {
+  left: -2px;
+  text-shadow: 2px 0 #00ffff;
+  animation: red-glitch-2 0.4s infinite linear alternate-reverse;
+}
+
+@keyframes red-glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes red-glitch-1 {
+  0% { clip-path: inset(20% 0 80% 0); }
+  100% { clip-path: inset(80% 0 20% 0); }
+}
+@keyframes scroll {
+  to {
+    transform: translate(calc(-50% - 0.5rem));
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+}
+
+@keyframes red-glitch-2 {
+  0% { clip-path: inset(70% 0 30% 0); }
+  100% { clip-path: inset(10% 0 90% 0); }
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip-path: inset(80% 0 0 0);
+  }
+  20% {
+    clip-path: inset(20% 0 60% 0);
+  }
+  40% {
+    clip-path: inset(60% 0 20% 0);
+  }
+  60% {
+    clip-path: inset(10% 0 70% 0);
+  }
+  80% {
+    clip-path: inset(40% 0 30% 0);
+  }
+  100% {
+    clip-path: inset(0 0 90% 0);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip-path: inset(10% 0 70% 0);
+  }
+  20% {
+    clip-path: inset(60% 0 20% 0);
+  }
+  40% {
+    clip-path: inset(20% 0 60% 0);
+  }
+  60% {
+    clip-path: inset(80% 0 0 0);
+  }
+  80% {
+    clip-path: inset(0 0 90% 0);
+  }
+  100% {
+    clip-path: inset(40% 0 30% 0);
+  }
+}
+
+/* Text reveal animation */
+.reveal-text {
+  position: relative;
+  overflow: hidden;
+}
+
+.reveal-text span {
+  display: block;
+  animation: text-reveal 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation-delay: calc(0.1s * var(--index));
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+/* Shimmer effect */
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(239, 68, 68, 0.5) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: text-shimmer 3s infinite;
+}
+
+/* Neon text effect */
+.neon-text {
+  text-shadow: 0 0 5px rgba(239, 68, 68, 0.5), 0 0 10px rgba(239, 68, 68, 0.5), 0 0 15px rgba(239, 68, 68, 0.5), 0 0
+    20px rgba(239, 68, 68, 1), 0 0 35px rgba(239, 68, 68, 1), 0 0 40px rgba(239, 68, 68, 1);
+}
+
+/* Matrix rain effect */
+.matrix-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb)));
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Improved container sizing */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Improved section spacing */
+section {
+  padding: 6rem 0;
+}
+
+/* Improved heading sizes */
+h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 2.5rem;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 1.4;
+}
+
+/* Improved card sizing */
+.card {
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+/* Improved form element sizing */
+input,
+textarea {
+  font-size: 1.1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+/* Improved button sizing */
+button {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+}
+
+/* Improved icon sizing */
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  section {
+    padding: 4rem 0;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Improved contact form layout */
+.contact-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Improved social links */
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.social-link {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* Improved animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}

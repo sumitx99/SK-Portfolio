@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+    
+    /* Light Mode - Red Theme */
+    --background: 0 0% 100%;               /* White */
+    --foreground: 0 0% 10%;                /* Dark gray */
+    
+    --card: 0 0% 98%;                      /* Light gray */
+    --card-foreground: 0 0% 10%;           /* Dark gray */
+    
+    --popover: 0 0% 100%;                  /* White */
+    --popover-foreground: 0 0% 10%;        /* Dark gray */
+    
+    --primary: 0 84% 60%;                  /* Red-500 */
+    --primary-foreground: 0 0% 98%;        /* Almost white */
+    
+    --secondary: 0 0% 96%;                 /* Very light gray */
+    --secondary-foreground: 0 0% 10%;      /* Dark gray */
+    
+    --muted: 0 0% 96%;                     /* Very light gray */
+    --muted-foreground: 0 0% 45%;          /* Medium gray */
+    
+    --accent: 0 84% 60%;                   /* Red-500 */
+    --accent-foreground: 0 0% 98%;         /* Almost white */
+    
+    --destructive: 0 84% 60%;              /* Red-500 */
+    --destructive-foreground: 0 0% 98%;    /* Almost white */
+    
+    --border: 0 0% 85%;                    /* Light gray border */
+    --input: 0 0% 85%;                     /* Light gray input */
+    --ring: 0 84% 60%;                     /* Red-500 */
+    
+    --radius: 0.5rem;
+    
+    /* Chart colors (optional) */
+    --chart-1: 0 84% 60%;                  /* Red */
+    --chart-2: 0 72% 51%;                  /* Red-600 */
+    --chart-3: 0 62% 43%;                  /* Red-700 */
+    --chart-4: 0 54% 35%;                  /* Red-800 */
+    --chart-5: 0 47% 28%;                  /* Red-900 */
+  }
+  
+  .dark {
+    /* Dark Mode - Red Theme */
+    --background: 0 0% 7%;                 /* Almost black */
+    --foreground: 0 0% 98%;                /* Almost white */
+    
+    --card: 0 0% 10%;                      /* Dark gray */
+    --card-foreground: 0 0% 98%;           /* Almost white */
+    
+    --popover: 0 0% 7%;                    /* Almost black */
+    --popover-foreground: 0 0% 98%;        /* Almost white */
+    
+    --primary: 0 84% 60%;                  /* Red-500 */
+    --primary-foreground: 0 0% 98%;        /* Almost white */
+    
+    --secondary: 0 0% 13%;                 /* Dark gray */
+    --secondary-foreground: 0 0% 98%;      /* Almost white */
+    
+    --muted: 0 0% 15%;                     /* Dark gray */
+    --muted-foreground: 0 0% 65%;          /* Light gray */
+    
+    --accent: 0 84% 60%;                   /* Red-500 */
+    --accent-foreground: 0 0% 98%;         /* Almost white */
+    
+    --destructive: 0 84% 60%;              /* Red-500 */
+    --destructive-foreground: 0 0% 98%;    /* Almost white */
+    
+    --border: 0 0% 20%;                    /* Dark gray border */
+    --input: 0 0% 20%;                     /* Dark gray input */
+    --ring: 0 84% 60%;                     /* Red-500 */
+    
+    /* Chart colors (optional) */
+    --chart-1: 0 84% 60%;                  /* Red */
+    --chart-2: 0 72% 51%;                  /* Red-600 */
+    --chart-3: 0 62% 43%;                  /* Red-700 */
+    --chart-4: 0 54% 35%;                  /* Red-800 */
+    --chart-5: 0 47% 28%;                  /* Red-900 */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--secondary));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(0 84% 50%);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-red-600 to-red-700;
+}
+
+/* Matrix rain opacity adjustment */
+.matrix-container {
+  opacity: 0.05;
+}
+
+/* Animation classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Additional custom classes */
+.bg-black-900 {
+  @apply bg-[#121212];
+}
+
+.bg-black-950 {
+  @apply bg-[#0a0a0a];
+}
+
+/* Light mode specific overrides */
+:root {
+  /* Ensure MatrixRain is visible in light mode */
+  .matrix-container {
+    opacity: 0.03;
+  }
+  
+  /* Adjust red glows for light mode */
+  .shadow-red-500\/5 {
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.05);
+  }
+  
+  .shadow-red-500\/20 {
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.1);
+  }
+  
+  /* Better contrast for cards in light mode */
+  .card {
+    @apply shadow-sm border-border/50;
+  }
+}
+
+/* Dark mode specific overrides */
+.dark {
+  /* Darken matrix rain in dark mode */
+  .matrix-container {
+    opacity: 0.05;
+  }
+  
+  /* Enhance red glows in dark mode */
+  .shadow-red-500\/5 {
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.1);
+  }
+  
+  .shadow-red-500\/20 {
+    box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
+  }
+  
+  /* Dark mode card enhancements */
+  .card {
+    @apply shadow-lg border-border/30;
+  }
+  
+  /* Custom dark mode background classes */
+  .bg-black-900 {
+    @apply bg-[#121212];
+  }
+  
+  .bg-black-950 {
+    @apply bg-[#0a0a0a];
+  }
+}
+
+/* Smooth transitions for theme changes */
+* {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease, 
+              color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Remove transitions for performance-critical elements */
+.bg-background,
+.text-foreground,
+.border-border {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease;
+}
