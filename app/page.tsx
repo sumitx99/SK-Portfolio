@@ -128,6 +128,9 @@ export default function Home() {
   const isHeroInView = useInView(heroRef, { once: false })
   const [showFallback, setShowFallback] = useState(false)
 
+  const [isHoveredBE, setIsHoveredBE] = useState(false);
+  const [isHoveredInter, setIsHoveredInter] = useState(false);
+
   // Use the scroll to section hook
   useScrollToSection()
 
@@ -839,11 +842,24 @@ I work with React.js, Kafka, AWS services, and microservices built with FastAPI 
                       <CardDescription className="text-base mt-1">Chandigarh University (2022-2026)</CardDescription>
                     </div>
                     <motion.div
-                      className="bg-gradient-to-r from-red-500/10 to-red-700/10 text-red-500 font-bold rounded-full h-16 w-16 flex items-center justify-center text-lg"
+                      className="bg-gradient-to-r from-red-500/10 to-red-700/10 text-red-500 font-bold rounded-full h-16 w-16 flex items-center justify-center text-lg overflow-hidden cursor-pointer relative"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      onHoverStart={() => setIsHoveredBE(true)}
+                      onHoverEnd={() => setIsHoveredBE(false)}
                     >
-                      8.04
+                      {isHoveredBE ? (
+                        "8.04"
+                      ) : (
+                        <div className="relative w-full h-full bg-white p-1">
+                           <ImageWithFallback
+                            src="/images/companies/chandigarh-university-logo-1.webp" 
+                            alt="CU Logo"
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
+                      )}
                     </motion.div>
                   </div>
                 </CardHeader>
@@ -893,11 +909,24 @@ I work with React.js, Kafka, AWS services, and microservices built with FastAPI 
                       </CardDescription>
                     </div>
                     <motion.div
-                      className="bg-gradient-to-r from-red-500/10 to-red-700/10 text-red-500 font-bold rounded-full h-16 w-16 flex items-center justify-center text-lg"
+                      className="bg-gradient-to-r from-red-500/10 to-red-700/10 text-red-500 font-bold rounded-full h-16 w-16 flex items-center justify-center text-lg overflow-hidden cursor-pointer relative"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                      onHoverStart={() => setIsHoveredInter(true)}
+                      onHoverEnd={() => setIsHoveredInter(false)}
                     >
-                      91%
+                      {isHoveredInter ? (
+                        "91%"
+                      ) : (
+                        <div className="relative w-full h-full bg-white p-1">
+                           <ImageWithFallback
+                            src="/images/companies/kv-logo.avif" 
+                            alt="KV Logo"
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
+                      )}
                     </motion.div>
                   </div>
                 </CardHeader>
