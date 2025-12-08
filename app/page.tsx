@@ -43,6 +43,7 @@ import TypewriterEffect from "@/components/ui/typewriter-effect"
 import { ContactSection } from "@/components/contact-section"
 
 // In your page.tsx imports section (around line 1-30), add:
+import FluidCursor from "@/components/FluidCursor"; // Adjust path if needed
 import { ThemeToggle } from "@/components/theme-toggle"
 import { SpaceParallaxSection } from "@/components/space-parallax-section"
 import { TestimonialsSection } from "@/components/testimonials-section";
@@ -475,6 +476,7 @@ if (response.ok) {
           className="py-20 md:py-32 flex flex-col md:flex-row items-center gap-12 relative"
           ref={heroRef}
         >
+           <FluidCursor /> 
           <motion.div
             className="flex-1 space-y-6"
             initial={{ opacity: 0, x: -50 }}
@@ -697,6 +699,7 @@ if (response.ok) {
             variants={fadeIn}
             className="mb-12 text-center"
           >
+            
             <Badge
               variant="outline"
               className="px-4 py-1 text-sm bg-gradient-to-r from-red-500/20 to-red-700/20 border-red-500/30 text-red-500 mb-4"
